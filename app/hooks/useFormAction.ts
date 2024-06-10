@@ -11,15 +11,21 @@ type FormAction<S, E> = (
 ) => Promise<Success<S> | Error<E>>;
 type Status = 'initial' | 'loading' | 'complete';
 
-export function useFormAction<S, E>(
-  action: FormAction<S, E>
-): [
-  Status,
-  Error<E>['error'] | null,
-  Success<S>['message'] | null,
-  (formData: FormData) => void,
-  React.MutableRefObject<HTMLFormElement | null>
-] {
+export function useFormAction<S, E>({
+  action,
+  onSuccess,
+  onError,
+}: {
+  action: FormAction<S, E>;
+  onSuccess?: (message: Success<S>['message']) => void;
+  onError?: (error: Error<E>['error']) => void;
+}): {
+  status: Status;
+  error: Error<E>['error'] | null;
+  response: Success<S>['message'] | null;
+  formAction: (formData: FormData) => void;
+  formRef: React.MutableRefObject<HTMLFormElement | null>;
+} {
   const [status, setStatus] = useState<Status>('initial');
   const [error, setError] = useState<Error<E>['error'] | null>(null);
   const [response, setResponse] = useState<
@@ -34,8 +40,10 @@ export function useFormAction<S, E>(
         throw result.error;
       }
       setResponse(result.message);
+      onSuccess?.(result.message);
     } catch (err) {
       setError(err as E);
+      onError?.(err as E);
     } finally {
       setStatus('complete');
     }
@@ -59,5 +67,5 @@ export function useFormAction<S, E>(
     };
   }, []);
 
-  return [status, error, response, formAction, ref];
+  return { status, error, response, formAction, formRef: ref };
 }

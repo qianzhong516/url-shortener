@@ -3,10 +3,14 @@
 import { useFormAction } from '@/app/hooks/useFormAction';
 import { convertUrl } from '@/app/server_actions';
 import Button from '@/app/ui/button';
+import { useState } from 'react';
 
 export default function UrlShortener() {
-    const [status, error, response, formAction, ref] = useFormAction(convertUrl);
-    console.log(status, response)
+    const [urlList, setUrlList] = useState<string[]>([]);
+    const { status, error, formAction, formRef: ref } = useFormAction({
+        action: convertUrl,
+        onSuccess: (result) => setUrlList(prev => [...prev, result.shortUrl]),
+    });
 
     return (
         <>
@@ -15,7 +19,9 @@ export default function UrlShortener() {
                 <Button type='submit' disabled={status === 'loading'} >Shorten it!</Button>
             </form>
             {!!error && <div>{String(error)}</div>}
-            {response && <div>{response.shortUrl}</div>}
+            {urlList.length > 0 && <ul>
+                {urlList.map((url, i) => <li key={i}>{url}</li>)}
+            </ul>}
         </>
     );
 }
