@@ -1,6 +1,6 @@
 'use client';
 
-import { useState } from 'react';
+import { useEffect, useRef, useState } from 'react';
 import type {
   ErrorResponse as Error,
   SuccessResponse as Success,
@@ -17,17 +17,18 @@ export function useFormAction<S, E>(
   Status,
   Error<E>['error'] | null,
   Success<S>['message'] | null,
-  (formData: FormData) => void
+  (formData: FormData) => void,
+  React.MutableRefObject<HTMLFormElement | null>
 ] {
   const [status, setStatus] = useState<Status>('initial');
   const [error, setError] = useState<Error<E>['error'] | null>(null);
   const [response, setResponse] = useState<
     Success<S>['message'] | null
   >(null);
-  console.log({ action });
+  const ref = useRef<HTMLFormElement | null>(null);
+
   const formAction = async (formData: FormData) => {
     try {
-      setStatus('loading');
       const result = await action(formData);
       if (!result.success) {
         throw result.error;
@@ -40,5 +41,23 @@ export function useFormAction<S, E>(
     }
   };
 
-  return [status, error, response, formAction];
+  // pending state needs to be updated on the client side, because it seems
+  // state changes are delayed until the server action finishes.
+  useEffect(() => {
+    if (!ref.current) {
+      return;
+    }
+
+    const onSubmit = () => {
+      setStatus('loading');
+    };
+
+    ref.current.addEventListener('submit', onSubmit);
+
+    return () => {
+      ref.current?.removeEventListener('submit', onSubmit);
+    };
+  }, []);
+
+  return [status, error, response, formAction, ref];
 }
