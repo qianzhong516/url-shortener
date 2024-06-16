@@ -1,14 +1,22 @@
 'use client'
 
+import type { FormAction } from '@/app/hooks/useFormAction'
 import { useFormAction } from '@/app/hooks/useFormAction';
-import { convertUrl } from '@/app/server_actions';
-import Button from '@/app/ui/button';
+import Button from '@/app/ui/button/button';
 import { useState } from 'react';
+import UrlList from '@/app/ui/url_list/list';
 
-export default function UrlShortener() {
+export default function UrlShortener({
+    onShortenUrl
+}: {
+    onShortenUrl: FormAction<{
+        longUrl: string;
+        shortUrl: string;
+    }, unknown>
+}) {
     const [urlList, setUrlList] = useState<string[]>([]);
     const { status, error, formAction, formRef: ref } = useFormAction({
-        action: convertUrl,
+        action: onShortenUrl,
         onSuccess: (result) => setUrlList(prev => [...prev, result.shortUrl]),
     });
 
@@ -19,9 +27,7 @@ export default function UrlShortener() {
                 <Button type='submit' disabled={status === 'loading'} >Shorten it!</Button>
             </form>
             {!!error && <div>{String(error)}</div>}
-            {urlList.length > 0 && <ul>
-                {urlList.map((url, i) => <li key={i}>{url}</li>)}
-            </ul>}
+            {urlList.length > 0 && <UrlList data={urlList} />}
         </>
     );
 }

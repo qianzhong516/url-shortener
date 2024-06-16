@@ -6,9 +6,10 @@ import type {
   SuccessResponse as Success,
 } from '@/app/server_actions';
 
-type FormAction<S, E> = (
+export type FormAction<S, E> = (
   formData: FormData
 ) => Promise<Success<S> | Error<E>>;
+
 type Status = 'initial' | 'loading' | 'complete';
 
 export function useFormAction<S, E>({
