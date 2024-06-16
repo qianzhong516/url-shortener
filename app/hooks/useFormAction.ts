@@ -12,6 +12,9 @@ export type FormAction<S, E> = (
 
 type Status = 'initial' | 'loading' | 'complete';
 
+// this hook
+// 1) tracks the form submission status after the server action is invoked.
+// 2) triggers callbacks on form submission success/error.
 export function useFormAction<S, E>({
   action,
   onSuccess,
