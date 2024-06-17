@@ -17,7 +17,7 @@ export default function UrlShortener({
     const [urlList, setUrlList] = useState<string[]>([]);
     const { status, error, formAction, formRef: ref } = useFormAction({
         action: onShortenUrl,
-        onSuccess: (result) => setUrlList(prev => [...prev, result.shortUrl]),
+        onSuccess: (result) => setUrlList(prev => [...prev, makeUrl(result.shortUrl)]),
     });
 
     return (
@@ -30,5 +30,10 @@ export default function UrlShortener({
             {urlList.length > 0 && <UrlList data={urlList} />}
         </>
     );
+}
+
+
+function makeUrl(shortcode: string) {
+    return `http://localhost:3000/${shortcode}`;
 }
 

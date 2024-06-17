@@ -1,5 +1,7 @@
 'use server';
 
+import { z } from 'zod';
+import CRC32 from 'crc-32';
 import { Url } from '@/app/db/model';
 
 export type SuccessResponse<T> = {
@@ -18,10 +20,17 @@ export async function convertUrl(
   | SuccessResponse<{ longUrl: string; shortUrl: string }>
   | ErrorResponse<unknown>
 > {
-  // TODO: add validation
   try {
-    const longUrl = formData.get('longUrl');
-    const url = await Url.build({ longUrl, shortUrl: 'x' }).save();
+    const isUrl = z.string().url();
+    const longUrl = isUrl.parse(formData.get('longUrl'));
+
+    const [url, created] = await Url.findOrCreate({
+      where: {
+        longUrl,
+        // x >>> 0 converts a number value to unsigned 32-bit integer.
+        shortUrl: (CRC32.str(longUrl) >>> 0).toString(16),
+      },
+    });
     return {
       success: true,
       message: url.toJSON(),
