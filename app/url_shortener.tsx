@@ -32,7 +32,6 @@ export default function UrlShortener({
     );
 }
 
-
 function makeUrl(shortcode: string) {
     return `http://localhost:3000/${shortcode}`;
 }
