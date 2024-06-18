@@ -3,8 +3,9 @@
 import type { FormAction } from '@/app/hooks/useFormAction'
 import { useFormAction } from '@/app/hooks/useFormAction';
 import Button from '@/app/ui/button/button';
-import { useState } from 'react';
+import React, { useState } from 'react';
 import UrlList from '@/app/ui/url_list/list';
+import clsx from 'clsx';
 
 export default function UrlShortener({
     onShortenUrl
@@ -12,7 +13,7 @@ export default function UrlShortener({
     onShortenUrl: FormAction<{
         longUrl: string;
         shortUrl: string;
-    }, unknown>
+    }, string>
 }) {
     const [urlList, setUrlList] = useState<{
         longUrl: string,
@@ -25,18 +26,23 @@ export default function UrlShortener({
             shortUrl: makeUrl(result.shortUrl)
         }]),
     });
+    const errorBorder = clsx(error && 'border-2 border-red');
 
     return (
         <>
-            <form action={formAction} ref={ref} className='flex flex-wrap min-w-full min-h-[180px] items-center justify-between gap-x-2 bg-dark-violet bg-[url("/bg-shorten-desktop.svg")] bg-no-repeat bg-cover px-20 py-18 py-10 rounded-lg text-white'>
-                <input type='text' name='longUrl' id='longUrl' className='flex-1 p-1 text-black min-h-[40px]' />
-                <Button type='submit' disabled={status === 'loading'} className='max-w-full rounded-md'>Shorten it!</Button>
+            <form action={formAction} ref={ref} className='flex flex-col min-w-full min-h-[180px] justify-center bg-dark-violet bg-[url("/bg-shorten-desktop.svg")] bg-no-repeat bg-cover px-20 py-18 py-10 rounded-lg text-white'>
+                <div className='flex flex-wrap items-center justify-between gap-x-2'>
+                    <input type='text' name='longUrl' id='longUrl' className={`flex-1 w-full px-4 py-2 min-h-[40px] text-black rounded-md ${errorBorder}`} placeholder='Shorten a link here...' />
+                    <Button type='submit' disabled={status === 'loading'} className='max-w-full rounded-md'>Shorten it!</Button>
+                </div>
+                {error && <ErrorMessage>{error}</ErrorMessage>}
             </form>
-            {!!error && <div>{String(error)}</div>}
             {urlList.length > 0 && <UrlList data={urlList} />}
         </>
     );
 }
+
+const ErrorMessage = ({ children }: { children: React.ReactNode }) => <p className='text-red italic'>{children}</p>
 
 function makeUrl(shortcode: string) {
     return `http://localhost:3000/${shortcode}`;

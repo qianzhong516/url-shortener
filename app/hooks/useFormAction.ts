@@ -61,6 +61,7 @@ export function useFormAction<S, E>({
     }
 
     const onSubmit = () => {
+      setError(null);
       setStatus('loading');
     };
 

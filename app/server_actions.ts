@@ -1,6 +1,6 @@
 'use server';
 
-import { z } from 'zod';
+import { z, ZodError } from 'zod';
 import CRC32 from 'crc-32';
 import { Url } from '@/app/db/model';
 
@@ -21,7 +21,12 @@ export async function convertUrl(
   | ErrorResponse<unknown>
 > {
   try {
-    const isUrl = z.string().url();
+    const isUrl = z
+      .string()
+      .min(1, {
+        message: 'Please add a link',
+      })
+      .url();
     const longUrl = isUrl.parse(formData.get('longUrl'));
 
     const [url, created] = await Url.findOrCreate({
@@ -35,10 +40,11 @@ export async function convertUrl(
       success: true,
       message: url.toJSON(),
     };
-  } catch (error) {
+  } catch (error: unknown) {
+    const err = error as ZodError;
     return {
       success: false,
-      error,
+      error: err.issues[0].message,
     };
   }
 }
