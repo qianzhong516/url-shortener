@@ -9,8 +9,8 @@ export default function Navigation() {
                 <Image src="/logo.svg" width={150} height={80} alt='' />
                 <NavLinks />
             </div>
-            <div className='flex items-center gap-5'>
-                <Button>Login</Button>
+            <div className='flex items-center'>
+                <Button theme='secondary'>Login</Button>
                 <Button>Sign Up</Button>
             </div>
         </div>
