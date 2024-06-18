@@ -18,7 +18,7 @@ export async function convertUrl(
   formData: FormData
 ): Promise<
   | SuccessResponse<{ longUrl: string; shortUrl: string }>
-  | ErrorResponse<unknown>
+  | ErrorResponse<string>
 > {
   try {
     const isUrl = z
