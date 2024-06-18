@@ -15,6 +15,9 @@ const config: Config = {
       black: '#000000',
     },
     extend: {
+      fontSize: {
+        '7xl': ['4.5rem', { lineHeight: '1.15' }],
+      },
       colors: {
         'dark-violet': '#3b3054',
         'darker-violet': '#232127',
