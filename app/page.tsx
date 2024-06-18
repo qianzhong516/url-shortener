@@ -1,17 +1,11 @@
-import UrlShortener from './url_shortener';
-import { convertUrl } from '@/app/server_actions';
-import HeroSection from '@/app/hero';
+import HeroSection from '@/app/components/hero';
+import UrlShortenerSection from './components/url_shortener_section';
 
 export default function Home() {
-
   return (
-    <main className="flex min-h-screen flex-col">
+    <main className="flex min-h-screen flex-col items-center ">
       <HeroSection />
-      <section className='w-full bg-gray h-96'>
-        <div className='-translate-y-1/2 px-24'>
-          <UrlShortener onShortenUrl={convertUrl} />
-        </div>
-      </section>
+      <UrlShortenerSection />
     </main>
   );
 }
