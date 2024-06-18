@@ -5,7 +5,7 @@ import Navigation from '@/app/ui/navigation/navigation';
 
 const poppins = Poppins({
   subsets: ["latin"],
-  weight: ["400", "600"]
+  weight: ["400", "600", "700"]
 });
 
 export const metadata: Metadata = {
