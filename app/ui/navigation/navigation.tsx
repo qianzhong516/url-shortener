@@ -11,7 +11,7 @@ export default function Navigation() {
             </div>
             <div className='flex items-center'>
                 <Button theme='secondary'>Login</Button>
-                <Button>Sign Up</Button>
+                <Button className='rounded-full'>Sign Up</Button>
             </div>
         </div>
     </div>;
