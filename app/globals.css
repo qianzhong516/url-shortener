@@ -4,7 +4,7 @@
 
 :root {
   --foreground-rgb: 0, 0, 0;
-  font-size: 18px;
+  font-size: clamp(14px, 1vw, 18px);
 }
 
 * {
