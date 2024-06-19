@@ -1,5 +1,10 @@
 import Link from 'next/link';
-import { Facebook, Instagram, Twitter, Pinterest, Logo } from '@/app/ui/icon/icon';
+import Facebook from '@/app/ui/icon/facebook';
+import Instagram from '@/app/ui/icon/instagram';
+import Twitter from '@/app/ui/icon/twitter';
+import Pinterest from '@/app/ui/icon/pinterest';
+import Logo from '@/app/ui/icon/logo';
+
 
 const links = [
     {
