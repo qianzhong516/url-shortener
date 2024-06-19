@@ -52,3 +52,5 @@ export {
   Twitter,
   Logo
 }
+
+export default Facebook;

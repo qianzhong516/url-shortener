@@ -1,4 +1,6 @@
 import Card from '@/app/ui/card/card';
+import clsx from 'clsx';
+import './styles.css';
 
 const cards = [
     {
@@ -19,13 +21,13 @@ const cards = [
 ]
 
 export default function StatsSection() {
-    return <section className="w-full bg-light-gray flex flex-col items-center py-24">
-        <div className="mt-8 my-24 text-center">
-            <h1 className="text-3xl font-semibold">Advanced Statistics</h1>
-            <p className="text-gray-violet">Track how your links are performing across the web with our advanced statistics dashboard.</p>
+    return <section className="w-full bg-light-gray flex flex-col items-center pt-24 pb-48">
+        <div className="mt-8 mt-12 mb-20 text-center">
+            <h1 className="text-4xl font-semibold mb-2">Advanced Statistics</h1>
+            <p className="text-lg text-gray-violet">Track how your links are performing across the web with our advanced statistics dashboard.</p>
         </div>
         <div className="flex flex-wrap md:gap-x-8 gap-y-12 justify-center items-center">
-            {cards.map((props, i) => <Card key={i} {...props} />)}
+            {cards.map((props, i) => <Card key={i} className={clsx(i === 1 && 'card', i === 1 && 'md:translate-y-8', i === 2 && 'md:translate-y-16')} {...props} />)}
         </div>
     </section>
 }
