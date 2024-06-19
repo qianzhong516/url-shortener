@@ -21,7 +21,7 @@ const cards = [
 ]
 
 export default function StatsSection() {
-    return <section className="w-full bg-light-gray flex flex-col items-center pt-24 pb-48">
+    return <section className="w-full bg-light-gray flex flex-col items-center pb-48">
         <div className="mt-8 mt-12 mb-20 text-center">
             <h1 className="text-4xl font-semibold mb-2">Advanced Statistics</h1>
             <p className="text-lg text-gray-violet">Track how your links are performing across the web with our advanced statistics dashboard.</p>
