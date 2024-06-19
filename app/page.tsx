@@ -1,6 +1,7 @@
 import HeroSection from '@/app/components/hero';
 import UrlShortenerSection from './components/url_shortener_section';
 import StatsSection from './components/stats_section';
+import CallToAction from './components/call_to_action';
 
 export default function Home() {
   return (
@@ -8,6 +9,7 @@ export default function Home() {
       <HeroSection />
       <UrlShortenerSection />
       <StatsSection />
+      <CallToAction />
     </main>
   );
 }
