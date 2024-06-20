@@ -6,8 +6,8 @@ const navLinks = [
     { text: 'Resources', href: '/resources' },
 ]
 
-export default function NavLinks() {
-    return <div className="flex gap-5">
-        {navLinks.map(({ text, href }, i) => <Link key={i} href={href} className='font-semibold text-gray hover:text-black'>{text}</Link>)}
-    </div>
+export default function NavLinks({ className }: { className?: string }) {
+    return <ul className={className}>
+        {navLinks.map(({ text, href }, i) => <li key={i}><Link href={href} className='font-semibold md:text-gray md:hover:text-black'>{text}</Link></li>)}
+    </ul>
 }
