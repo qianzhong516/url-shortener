@@ -45,6 +45,6 @@ export default function UrlShortener({
 const ErrorMessage = ({ children }: { children: React.ReactNode }) => <p className='text-red italic'>{children}</p>
 
 function makeUrl(shortcode: string) {
-    return `http://localhost:3000/${shortcode}`;
+    return `${process.env.NEXT_PUBLIC_VERCEL_URL}/${shortcode}`;
 }
 
