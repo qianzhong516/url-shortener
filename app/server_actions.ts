@@ -14,7 +14,7 @@ export type ErrorResponse<T> = {
   error: T;
 };
 
-// TODO: Rate limit this request. Ref: https://stackoverflow.com/a/77559252/8893023.
+// TODO: Rate limit this request. Ref: https://stackoverflow.com/a/77559252/8893023
 export async function convertUrl(
   formData: FormData
 ): Promise<
