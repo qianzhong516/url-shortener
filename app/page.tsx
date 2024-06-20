@@ -5,7 +5,7 @@ import CallToAction from './components/call_to_action';
 
 export default function Home() {
   return (
-    <main className="flex min-h-screen flex-col items-center ">
+    <main className="flex flex-1 flex-col items-center ">
       <HeroSection />
       <UrlShortenerSection />
       <StatsSection />

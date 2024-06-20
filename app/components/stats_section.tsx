@@ -21,7 +21,7 @@ const cards = [
 ]
 
 export default function StatsSection() {
-    return <section className="flex flex-col items-center w-full bg-light-gray">
+    return <section className="flex grow flex-col justify-center items-center w-full bg-light-gray">
         <div className='max-w-lg px-12 md:px-0 pb-48'>
             <div className="mt-12 mb-20 text-center">
                 <h1 className="text-4xl font-semibold mb-2">Advanced Statistics</h1>
