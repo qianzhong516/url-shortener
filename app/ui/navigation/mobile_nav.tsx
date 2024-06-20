@@ -13,7 +13,7 @@ export default function MobileNavigation() {
         <>
             <div className='md:hidden flex w-full justify-between items-center px-12 '>
                 <Image src="/logo.svg" width={150} height={80} alt='' />
-                <button className='text-4xl font-bold' onClick={onClick}>☰</button>
+                <button className='text-4xl font-bold text-gray' onClick={onClick}>☰</button>
             </div>
             {showMenu && <div className='md:hidden block p-8 w-4/5 bg-dark-violet text-center mt-4 rounded-lg m-auto'>
                 <NavLinks className='*:font-bold *:text-xl *:text-white *:mb-6' />

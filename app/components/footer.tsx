@@ -68,8 +68,8 @@ const socialMedia = [
 ]
 
 export default function Footer() {
-    return <footer className='flex flex-col items-center bg-darker-violet w-full'>
-        <div className='max-w-lg flex flex-wrap justify-between w-full p-12'>
+    return <footer className='flex flex-col items-center bg-darker-violet w-full pb-4'>
+        <div className='max-w-lg flex flex-wrap justify-between w-full p-12 mb-4'>
             <div className='flex-1'>
                 <Logo width={180} height={90} className='fill-white' />
             </div>
@@ -89,5 +89,6 @@ export default function Footer() {
                 </div>
             </div>
         </div>
+        <p className='text-gray text-sm'>Developed by Janice Zhong &copy;2024</p>
     </footer>
 }

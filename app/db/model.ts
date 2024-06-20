@@ -25,5 +25,4 @@ export const Url = sequelize.define<UrlModel>('Url', {
   },
 });
 
-// TODO: move this to db seed script
 Url.sync();
