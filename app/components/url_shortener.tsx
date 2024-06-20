@@ -30,10 +30,10 @@ export default function UrlShortener({
 
     return (
         <>
-            <form action={formAction} ref={ref} className='flex flex-col min-w-full min-h-[180px] justify-center bg-dark-violet bg-[url("/bg-shorten-desktop.svg")] bg-no-repeat bg-cover px-20 py-18 py-10 rounded-lg text-white'>
-                <div className='flex flex-wrap items-center justify-between gap-x-2'>
-                    <input type='text' name='longUrl' id='longUrl' className={`flex-1 w-full px-4 py-2 min-h-[40px] text-black rounded-md ${errorBorder}`} placeholder='Shorten a link here...' />
-                    <Button type='submit' disabled={status === 'loading'} className='max-w-full rounded-md'>Shorten it!</Button>
+            <form action={formAction} ref={ref} className='flex flex-col min-w-full min-h-[180px] justify-center bg-dark-violet bg-[url("/bg-shorten-desktop.svg")] bg-no-repeat bg-cover px-6 md:px-20 md:py-10 rounded-lg text-white'>
+                <div className='flex flex-wrap items-center justify-between gap-x-2 gap-y-4'>
+                    <input type='text' name='longUrl' id='longUrl' className={`flex-1  px-4 py-2 max-w-full min-h-[40px] text-black rounded-md ${errorBorder}`} placeholder='Shorten a link here...' />
+                    <Button type='submit' disabled={status === 'loading'} className='w-full md:w-auto rounded-md'>Shorten it!</Button>
                 </div>
                 {error && <ErrorMessage>{error}</ErrorMessage>}
             </form>

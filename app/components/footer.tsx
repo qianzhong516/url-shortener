@@ -69,11 +69,11 @@ const socialMedia = [
 
 export default function Footer() {
     return <footer className='flex flex-col items-center bg-darker-violet w-full'>
-        <div className='max-w-lg flex flex-wrap justify-between w-full py-12'>
+        <div className='max-w-lg flex flex-wrap justify-between w-full p-12'>
             <div className='flex-1'>
                 <Logo width={180} height={90} className='fill-white' />
             </div>
-            <div className='flex flex-3 flex-wrap grow text-white justify-evenly'>
+            <div className='flex flex-3 flex-wrap gap-4 grow text-white justify-between'>
                 {links.map((link, i) => <div key={i}>
                     <h4 className='font-bold mb-4'>{link.title}</h4>
                     <ul>
